@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+});
+
+Route::resource('budget',BudgetController::class);
+Route::resource('projet',ProjetController::class);
+Route::resource('connexion',ConnexionController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
