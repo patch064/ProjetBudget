@@ -1,5 +1,4 @@
-@extends('template1')
-@section('css')
+<x-app-layout>
     <style>
         .card-footer {
             justify-content: center;
@@ -11,8 +10,8 @@
         }
     </style>
 
-@endsection
-@section('contenu')
+
+
 @if(session()->has('info'))
 <div class="notification is-success">
     {{ session('info') }}
@@ -64,4 +63,5 @@
         <a class="button is-info" href="{{ route('projet.index') }}">Projet</a>
     </footer>
 </div>
-@endsection
+
+</x-app-layout>

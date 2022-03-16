@@ -1,6 +1,6 @@
-    @extends('template1')
-    @section('contenu')
-        <div class="card">
+<x-app-layout>
+
+<div class="card">
             <header class="card-header">
                 <p class="title"><strong>Vue du projet :</strong></p>
             </header>
@@ -17,4 +17,4 @@
                 <a class="button is-info" href="{{ route('projet.index') }}">Retour à la liste</a>
         </footer>
         </div>
-    @endsection
+</x-app-layout>

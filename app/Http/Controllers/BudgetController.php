@@ -97,6 +97,10 @@ class BudgetController extends Controller
         $budget->delete();
         return redirect()->route('budget.index')->with('info', 'Le Budget a bien été suprimée');
     }
+    public function __construct ()
+    {
+        $this-> middleware('auth')->only('edit','destroy','create');
+    }
 }
 
 

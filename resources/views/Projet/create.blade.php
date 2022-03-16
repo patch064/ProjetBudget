@@ -1,5 +1,5 @@
-@extends('template1')
-@section('contenu')
+<x-app-layout>
+
 <div class="card">
     <header class="card-header">
         <p class="card-header-title">Création d'un projet</p>
@@ -45,4 +45,4 @@
         </div>
     </div>
 </div>
-@endsection
+</x-app-layout>

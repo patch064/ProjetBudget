@@ -20,14 +20,16 @@ use App\Http\Controllers\ConnexionController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/budget', function () {
+    return view('budget');
+})->middleware(['auth'])->name('budget');
 
 require __DIR__.'/auth.php';
 
-Route::resource('budget',BudgetController::class);
-Route::resource('projet',ProjetController::class);
-Route::resource('connexion',ConnexionController::class);
 
+Route::middleware('auth')->group(function(){
+    Route::resource('budget',BudgetController::class);
+    Route::resource('projet',ProjetController::class);
+    Route::resource('connexion',ConnexionController::class);
+});
 

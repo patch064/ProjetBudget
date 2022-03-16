@@ -1,6 +1,6 @@
-@extends('template1')
-@section('css')
-    <style>
+<x-app-layout>
+
+<style>
         .card-footer {
             justify-content: center;
             align-items: center;
@@ -11,8 +11,7 @@
         }
     </style>
 
-@endsection
-@section('contenu')
+
 @if(session()->has('info'))
 <div class="notification is-success">
     {{ session('info') }}
@@ -68,4 +67,4 @@
         </footer>
 
 </div>
-@endsection
+</x-app-layout>
