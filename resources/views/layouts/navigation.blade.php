@@ -39,15 +39,17 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
-                        <form>
-                            <div><a class=" text-sm text-gray-600 hover:text-gray-900 p-2" href="http://projetbudget/">
-                                    Menu
-                                </a></div>
-                        </form>
+
+                            @csrf
+                            <x-dropdown-link :href="route('menu')">
+
+                                {{ __('menu') }}
+                            </x-dropdown-link>
 
                     </x-slot>
                 </x-dropdown>
             </div>
+
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
