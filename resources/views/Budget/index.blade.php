@@ -22,7 +22,7 @@
     <header class="card-header">
         <p class="card-header-title">Budgets</p>
 
-        <a class="button is-info" href="{{ route('budget.create') }}">Créer un budgets</a>
+        <!--<a class="button is-info" href="{{ route('budget.create') }}">Créer un budgets</a>-->
     </header>
     <div class="card-content">
 

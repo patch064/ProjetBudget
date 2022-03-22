@@ -29,10 +29,10 @@ class BudgetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('Budget/create');
-    }
+    //public function create()
+    //{
+    //    return view('Budget/create');
+    //}
 
     /**
      * Store a newly created resource in storage.
@@ -40,15 +40,15 @@ class BudgetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BudgetRequest  $request, Budget $budgets)
-    {
-        $budgets->libelle=$request->libelle;
-        $budgets->somme=$request->somme;
-
-
-        $budgets->save();
-        return redirect()->route('budget.index')->with('info','Le Budget ' . $budgets->libelle . ' a été créée');
-    }
+    //public function store(BudgetRequest  $request, Budget $budgets)
+    //{
+    //    $budgets->libelle=$request->libelle;
+    //    $budgets->somme=$request->somme;
+    //
+    //
+    //    $budgets->save();
+    //    return redirect()->route('budget.index')->with('info','Le Budget ' . $budgets->libelle . ' a été créée');
+    //}
 
     /**
      * Display the specified resource.
@@ -93,13 +93,13 @@ class BudgetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Budget $budget) {
-        $budget->delete();
-        return redirect()->route('budget.index')->with('info', 'Le Budget a bien été suprimée');
-    }
+    //public function destroy(Budget $budget) {
+    //    $budget->delete();
+    //    return redirect()->route('budget.index')->with('info', 'Le Budget a bien été suprimée');
+    //}
     public function __construct ()
     {
-        $this-> middleware('auth')->only('edit','destroy','create');
+        $this-> middleware('auth')->only('edit','show');
     }
 }
 
