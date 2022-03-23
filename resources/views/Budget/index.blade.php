@@ -22,7 +22,7 @@
     <header class="card-header">
         <p class="card-header-title">Budgets</p>
 
-        <a class="button is-info" href="{{ route('budget.create') }}">Créer un budgets</a>
+        <!--<a class="button is-info" href="{{ route('budget.create') }}">Créer un budgets</a>-->
     </header>
     <div class="card-content">
 
@@ -45,10 +45,10 @@
                         <td><a class="button is-primary" href="{{ route('budget.show', $budgets->id) }}">Voir</a></td>
                         <td><a class="button is-warning" href="{{ route('budget.edit', $budgets->id) }}">Modifier</a></td>
                         <td>
-                            <form action="{{ route('budget.destroy', $budgets->id) }}" method="post">
+                            <!--<form action="{{ route('budget.destroy', $budgets->id) }}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                                <button class="button is-danger" type="submit">Supprimer</button>
+                                <button class="button is-danger" type="submit">Supprimer</button>-->
                             </form>
                         </td>
                     </tr>
