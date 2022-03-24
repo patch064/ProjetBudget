@@ -1,6 +1,9 @@
 <x-app-layout>
 
+
 <style>
+
+
         .card-footer {
             justify-content: center;
             align-items: center;
@@ -8,6 +11,7 @@
         }
         select, .is-info {
             margin: 0.3em;
+
         }
     </style>
 
@@ -35,7 +39,7 @@
                         <th>Cout</th>
                         <th>Description</th>
                 </thead>
-                <tbody>
+                <body class="has-background-black">
 
                     @foreach($projet as $projets)
                     <tr>
@@ -56,7 +60,7 @@
                     </tr>
                     @endforeach
 
-                </tbody>
+                </body>
             </table>
 
     </div>
