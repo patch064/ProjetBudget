@@ -39,15 +39,17 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
-                        @csrf
-                        <x-dropdown-link :href="route('menu')">
 
-                            {{ __('menu') }}
-                        </x-dropdown-link>
+                            @csrf
+                            <x-dropdown-link :href="route('menu')">
+
+                                {{ __('menu') }}
+                            </x-dropdown-link>
 
                     </x-slot>
                 </x-dropdown>
             </div>
+
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
