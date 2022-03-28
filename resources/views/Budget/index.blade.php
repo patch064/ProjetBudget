@@ -64,4 +64,17 @@
     </footer>
 </div>
 
+  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
+
+
+    <div class="card" style="width:100%">
+        <header class="card-header">
+            <p class="card-header-title">Explication</p></header>
+        <div class="card-content">
+            <table class="table is-hoverable" >
+                <thead>
+                Ceci est votre porte monnaie, il se crée tout seul comme un grand lors de la création de votre compte, vous pouvez maintenant le remplir pour pouvoir créer vos projets.
+                </thead></table></div></div>
+
+
 </x-app-layout>

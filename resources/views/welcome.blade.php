@@ -7,7 +7,7 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -26,7 +26,7 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
-            }   button {
+            }   .test {
                     display: inline-block;
                     background-color: #1A202C;
                     border-radius: 10px;
@@ -41,16 +41,16 @@
                     margin: 5px;
                 }
 
-            button:hover {
+            .test:hover {
                 background-color: white;
                 color: #1A202C;
                 border-color: #1A202C;
 
             }
-            button:hover span {
+            .test:hover span {
                 padding-right: 25px;
             }
-            button:hover span:after {
+            .test:hover span:after {
                 opacity: 1;
                 right: 0;
             }
@@ -62,14 +62,14 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <button type="button"><a href="{{ url('/budget') }}" class="text-sm ">Budget</a></button>
-                        <button type="button"><a href="{{ url('/projet') }}" class="text-sm ">Projet</a></button>
+                       <a  href="{{ url('/budget') }}" class="text-sm test ">Budget</a>
+                        <a href="{{ url('/projet') }}" class="text-sm test ">Projet</a>
 
                     @else
-                        <button type="button"><a href="{{ route('login') }}" class="text-sm ">Log in</a></button>
+                        <a href="{{ route('login') }}" class="text-sm test">Log in</a>
 
                         @if (Route::has('register'))
-                                <button type="button"><a href="{{ route('register') }}" class="text-sm">Register</a></button>k
+                                <a href="{{ route('register') }}" class="text-sm test">Register</a>
                         @endif
                     @endauth
                 </div>
@@ -167,4 +167,4 @@
         </div>
     </body>
 </html>
-<!--Cette application est un pense bête qui permet de créer des projets en fonction d'un budget que vous définissez, elle fonctionne comme une calculatrice. <br>Warning : en aucun cas il ne vous sera demandé de rentrer vos coordonnées bancaires !!!</div>-->
+<!--Cette application est un pense bête qui permet de créer des projets fr fonction d'un budget que vous définissez, elle fonctionne comme une calculatrice. <br>Warning : fr aucun cas il ne vous sera demandé de rentrer vos coordonnées bancaires !!!</div>-->

@@ -69,6 +69,15 @@
             <a class="button is-info" href="{{ route('budget.index') }}">Budget</a>
 
         </footer>
-
 </div>
+    <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
+
+    <div class="card" style="width:100%">
+        <header class="card-header">
+            <p class="card-header-title">Explication</p></header>
+        <div class="card-content">
+            <table class="table is-hoverable" >
+                <thead>
+                Voici vos projets, utiliser l'argent mit dans le porte monnaie pour créer vos projets.
+                </thead></table></div></div>
 </x-app-layout>
