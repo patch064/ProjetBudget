@@ -54,12 +54,12 @@ class ProjetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show( $projetsid)
+    public function show($projetsid)
     {
         $projets=Projet::table($projetsid)//on recupere toutes les lignes de la table
-        ->join('users', 'projets.user_id', '=', 'users.id')
-            ->select('projets.*', 'users.id as user_id', 'users.name')
-            ->where('projets.id','=',$projetsid->id)
+            ->join('users', 'projets.user_id', '=', 'users.id')
+            ->select('projets.libelle'/*, 'projet.cout', 'description'*/)
+            ->where('users.id','=',$projetsid->user_id)
             ->get();
         return view('Projet/show', compact('projets'));
     }
