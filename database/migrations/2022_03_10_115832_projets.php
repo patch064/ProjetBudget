@@ -23,7 +23,7 @@ class Projets extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users')
+                ->on('Users')
                 ->onDelete('cascade');
 
         });

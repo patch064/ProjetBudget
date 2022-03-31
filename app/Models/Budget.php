@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Budget extends Model
 {
 
-    protected $fillable = ['libelle', 'somme', 'user_id'];
+    protected $fillable = ['libelle', 'somme', //'user_id'
+    ];
 
     use HasFactory;
     public $timestamps = false;
