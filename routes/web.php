@@ -19,7 +19,9 @@ use App\Http\Controllers\ConnexionController;
 
 Route::get('/', function () {
     return view('welcome');
+
 })->name ('menu');
+
 
 Route::get('/budget', function () {
     return view('budget');
@@ -33,3 +35,6 @@ Route::middleware('auth')->group(function(){
     Route::resource('projet',ProjetController::class);
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
