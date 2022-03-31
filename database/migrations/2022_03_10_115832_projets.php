@@ -13,6 +13,7 @@ class Projets extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('projets', function (Blueprint $table) {
 
             $table->id();

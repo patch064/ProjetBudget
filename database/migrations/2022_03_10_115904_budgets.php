@@ -13,6 +13,7 @@ class Budgets extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('budgets', function (Blueprint $table) {
 
             $table->id();
