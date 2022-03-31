@@ -22,7 +22,7 @@ class ProjetFactory extends Factory
         return ['Libelle' => $this->faker->text(10 ),
             'cout' => $this->faker->numberBetween(1, 10000),
             'description'=> $this->faker->text( 30),
-            //'user_id' => $this->faker->number()
+            'user_id' => $this->faker->numberBetween(1, 10)
         ];
     }
 }
