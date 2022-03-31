@@ -1,6 +1,9 @@
 <x-app-layout>
 
+
 <style>
+
+
         .card-footer {
             justify-content: center;
             align-items: center;
@@ -8,6 +11,7 @@
         }
         select, .is-info {
             margin: 0.3em;
+
         }
     </style>
 
@@ -35,7 +39,7 @@
                         <th>Cout</th>
                         <th>Description</th>
                 </thead>
-                <tbody>
+                <body class="has-background-black">
 
                     @foreach($projet as $projets)
                     <tr>
@@ -56,15 +60,24 @@
                     </tr>
                     @endforeach
 
-                </tbody>
+                </body>
             </table>
 
     </div>
 
         <footer class="card-footer">
-            <a class="button is-info" href="{{ route('budget.index') }}">Projet</a>
+            <a class="button is-info" href="{{ route('budget.index') }}">Budget</a>
 
         </footer>
-
 </div>
+    <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
+
+    <div class="card" style="width:100%">
+        <header class="card-header">
+            <p class="card-header-title">Explication</p></header>
+        <div class="card-content">
+            <table class="table is-hoverable" >
+                <thead>
+                Voici vos projets, utiliser l'argent mit dans le porte monnaie pour créer vos projets.
+                </thead></table></div></div>
 </x-app-layout>

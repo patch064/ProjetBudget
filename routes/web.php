@@ -19,7 +19,9 @@ use App\Http\Controllers\ConnexionController;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('menu');
+
+})->name ('menu');
+
 
 Route::get('/budget', function () {
     return view('budget');

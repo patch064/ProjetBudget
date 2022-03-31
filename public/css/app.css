@@ -41,6 +41,7 @@ html {
 */
 
 body {
+    background-color: #1A202C;
   margin: 0; /* 1 */
   line-height: inherit; /* 2 */
 }
@@ -908,7 +909,7 @@ select {
 }
 .bg-gray-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: darkgrey;
 }
 .bg-gray-800 {
   --tw-bg-opacity: 1;
