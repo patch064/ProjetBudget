@@ -18,7 +18,11 @@ class Budgets extends Migration
             $table->id();
             $table->string('libelle');
             $table->Integer('somme');
-
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

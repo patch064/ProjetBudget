@@ -56,8 +56,11 @@ class ProjetController extends Controller
      */
     public function show( $projetsid)
     {
-        $projets=Projet::find($projetsid); //on recupere toutes les lignes de la table
-
+        $projets=Projet::table($projetsid)//on recupere toutes les lignes de la table
+        ->join('categories', 'objets.idCategorie', '=', 'categories.id')
+            ->select('objets.*', 'categories.id as idCategorie', 'categories.libelle')
+            ->where('objets.id','=',$objet->id)
+            ->get();
         return view('Projet/show', compact('projets'));
     }
 
