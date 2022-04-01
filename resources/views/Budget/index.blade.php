@@ -38,9 +38,9 @@
 
                     @foreach($budget as $budgets)
                     <tr>
-                        <td>{{ $budgets->id }}</td>
-                        <td><strong>{{ $budgets->libelle }}</strong></td>
-                        <td><strong>{{ $budgets->somme }}</strong></td>
+                        <td>{{$budgets->id }}</td>
+                        <td><strong>{{$budgets->libelle }}</strong></td>
+                        <td><strong>{{$budgets->somme }}</strong></td>
 
                         <td><a class="button is-primary" href="{{ route('budget.show', $budgets->id) }}">Voir</a></td>
                         <td><a class="button is-warning" href="{{ route('budget.edit', $budgets->id) }}">Modifier</a></td>

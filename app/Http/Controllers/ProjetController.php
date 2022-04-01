@@ -6,17 +6,30 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Projet;
 use App\Http\Requests\ProjetRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB
 
-class ProjetController extends Controller
+;class ProjetController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+    Textes complets
+    id
+    libelle
+    cout
+    description
+    user_id
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $projet=Projet::orderBy('id', 'ASC')->get();
+        $projet=DB::table('projets')//on recupere toutes les lignes de la table
+        ->join('users', 'projets.user_id', '=', 'users.id')
+            ->select('projets.id', 'projets.libelle', 'projets.cout', 'projets.description')
+            ->where('projets.user_id','=',Auth::user()->getAuthIdentifier())
+            ->get();
+        //$projet=Projet::orderBy('id', 'ASC')->get();
         return view('Projet/index',compact('projet'));
     }
     //public function btn()
@@ -56,11 +69,7 @@ class ProjetController extends Controller
      */
     public function show($projetsid)
     {
-        $projets=Projet::table($projetsid)//on recupere toutes les lignes de la table
-            ->join('users', 'projets.user_id', '=', 'users.id')
-            ->select('projets.libelle'/*, 'projet.cout', 'description'*/)
-            ->where('users.id','=',$projetsid->user_id)
-            ->get();
+        $projets=Projet::find($projetsid);
         return view('Projet/show', compact('projets'));
     }
 
