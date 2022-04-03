@@ -4,7 +4,11 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Projet;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+
+// id user connecté
+//Auth::user()->getAuthIdentifier();
 
 class ProjetFactory extends Factory
 {
@@ -22,6 +26,7 @@ class ProjetFactory extends Factory
         return ['Libelle' => $this->faker->text(10 ),
             'cout' => $this->faker->numberBetween(1, 10000),
             'description'=> $this->faker->text( 30),
+            'user_id' => $this ->faker->numberBetween(1,20)
         ];
     }
 }

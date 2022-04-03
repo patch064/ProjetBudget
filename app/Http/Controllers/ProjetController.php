@@ -16,13 +16,14 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        $projet=Projet::orderBy('id', 'ASC')->get();
+        $auth_id=auth()->user()->id;
+        //dd($auth_id);
+        $projet=Projet::where('user_id',$auth_id)->get();
         return view('Projet/index',compact('projet'));
     }
-    //public function btn()
-    //{
-    //    return redirect('budget');
-    //}
+    //   $projet=Projet::orderBy('id', 'ASC')->get();
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,6 +45,8 @@ class ProjetController extends Controller
         $projets->libelle=$request->libelle;
         $projets->cout=$request->cout;
         $projets->description=$request->description;
+        $projets->user_id=auth()->user()->id;
+
         $projets->save();
         return redirect()->route('projet.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
     }
@@ -56,8 +59,7 @@ class ProjetController extends Controller
      */
     public function show( $projetsid)
     {
-        $projets=Projet::find($projetsid); //on recupere toutes les lignes de la table
-
+        $projets=Projet::find($projetsid);
         return view('Projet/show', compact('projets'));
     }
 
@@ -69,7 +71,7 @@ class ProjetController extends Controller
      */
     public function edit($projetsid)
     {
-        $projets=Projet::find($projetsid); //on recupere toutes les lignes de la table
+         //on recupere toutes les lignes de la table
 
         return view('Projet/edit', compact('projets'));
     }
