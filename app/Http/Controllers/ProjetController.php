@@ -71,7 +71,7 @@ class ProjetController extends Controller
      */
     public function edit($projetsid)
     {
-         //on recupere toutes les lignes de la table
+        $projets=Budget::find($projetsid);//on recupere toutes les lignes de la table
 
         return view('Projet/edit', compact('projets'));
     }
