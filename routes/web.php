@@ -35,6 +35,4 @@ Route::middleware('auth')->group(function(){
     Route::resource('projet',ProjetController::class);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+

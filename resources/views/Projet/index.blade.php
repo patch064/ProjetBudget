@@ -24,6 +24,14 @@
 
 <div class="card" style="width:100%">
     <header class="card-header">
+        @php
+// $jesuis = \Illuminate\Support\Facades\Auth::user()->id;
+//
+/* avant de lancer "php artisan db:seed" , il faut lancer
+        1- php artisan db:wipe
+        2- php artisan migrate
+        3-php artisan db:seed */
+        @endphp
         <p class="card-header-title">Projet</p>
 
         <a class="button is-info" href="{{ route('projet.create') }}">Créer un projet</a>

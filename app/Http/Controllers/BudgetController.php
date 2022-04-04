@@ -16,13 +16,12 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        $budget=Budget::orderBy('id', 'ASC')->get();
+        $auth_id=auth()->user()->id;
+        //dd($auth_id);
+        $budget=Budget::where('user_id',$auth_id)->get();
         return view('Budget/index',compact('budget'));
     }
-    //public function btn()
-    //{
-    //  return redirect('projet');
-    //}
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,7 +43,7 @@ class BudgetController extends Controller
     {
         $budgets->libelle=$request->libelle;
         $budgets->somme=$request->somme;
-
+        $budgets->user_id=auth()->user()->id;
 
         $budgets->save();
         return redirect()->route('budget.index')->with('info','Le Budget ' . $budgets->libelle . ' a été créée');
