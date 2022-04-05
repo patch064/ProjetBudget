@@ -42,7 +42,7 @@
             <table class="table is-hoverable" >
                 <thead>
                     <tr>
-                        <th>#</th>
+
                         <th>Libelle</th>
                         <th>Cout</th>
                         <th>Description</th>
@@ -51,7 +51,7 @@
 
                     @foreach($projet as $projets)
                     <tr>
-                        <td>{{ $projets->id }}</td>
+
                         <td><strong>{{ $projets->libelle }}</strong></td>
                         <td><strong>{{ $projets->cout }}</strong></td>
                         <td><strong>{{ $projets->description }}</strong></td>
