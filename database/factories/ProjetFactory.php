@@ -4,11 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Projet;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
-// id user connecté
-//Auth::user()->getAuthIdentifier();
 
 class ProjetFactory extends Factory
 {
