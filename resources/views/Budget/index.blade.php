@@ -29,7 +29,6 @@
             <table class="table is-hoverable" >
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Libelle</th>
                         <th>Somme</th>
                 </thead>
@@ -37,7 +36,6 @@
 
                     @foreach($budget as $budgets)
                     <tr>
-                        <td>{{ $budgets->id }}</td>
                         <td><strong>{{ $budgets->libelle }}</strong></td>
                         <td><strong>{{ $budgets->somme }}</strong></td>
 
