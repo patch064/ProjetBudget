@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Models\Budget;
 
 class RegisteredUserController extends Controller
 {
@@ -43,12 +44,18 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+
         ]);
+
 
         event(new Registered($user));
 
         Auth::login($user);
-
+        $budgets = Budget::create([
+            'libelle' => 'canard',
+            'somme' => '0',
+            'user_id' => auth()->user()->id
+        ]);
         return redirect(RouteServiceProvider::HOME);
     }
 }

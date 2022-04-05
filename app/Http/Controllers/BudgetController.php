@@ -16,23 +16,13 @@ class BudgetController extends Controller
      */
     public function index()
     {
-        $budget=Budget::orderBy('id', 'ASC')->get();
+        $auth_id=auth()->user()->id;
+        //dd($auth_id);
+        $budget=Budget::where('user_id',$auth_id)->get();
         return view('Budget/index',compact('budget'));
     }
-    //public function btn()
-    //{
-    //  return redirect('projet');
-    //}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('Budget/create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -44,7 +34,7 @@ class BudgetController extends Controller
     {
         $budgets->libelle=$request->libelle;
         $budgets->somme=$request->somme;
-
+        $budgets->user_id=auth()->user()->id;
 
         $budgets->save();
         return redirect()->route('budget.index')->with('info','Le Budget ' . $budgets->libelle . ' a été créée');
@@ -93,13 +83,10 @@ class BudgetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Budget $budget) {
-        $budget->delete();
-        return redirect()->route('budget.index')->with('info', 'Le Budget a bien été suprimée');
-    }
+
     public function __construct ()
     {
-        $this-> middleware('auth')->only('edit','destroy','create');
+        $this-> middleware('auth')->only('edit');
     }
 }
 

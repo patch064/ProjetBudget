@@ -21,7 +21,6 @@ class BudgetFactory extends Factory
     {
         return ['Libelle' => $this->faker->text(10 ),
             'somme' => $this->faker->numberBetween(1, 10000),
-            'user_id' => $this->faker->numberBetween(1, 10)
             ];
     }
 }

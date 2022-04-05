@@ -13,7 +13,6 @@ class Projets extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::create('projets', function (Blueprint $table) {
 
             $table->id();
@@ -23,9 +22,8 @@ class Projets extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('Users')
+                ->on('User')
                 ->onDelete('cascade');
-
         });
     }
 

@@ -19,7 +19,9 @@ use App\Http\Controllers\ConnexionController;
 
 Route::get('/', function () {
     return view('welcome');
+
 })->name ('menu');
+
 
 Route::get('/budget', function () {
     return view('budget');
@@ -27,9 +29,9 @@ Route::get('/budget', function () {
 
 require __DIR__.'/auth.php';
 
-
 Route::middleware('auth')->group(function(){
     Route::resource('budget',BudgetController::class);
     Route::resource('projet',ProjetController::class);
 });
+
 
