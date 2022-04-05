@@ -29,7 +29,6 @@ Route::get('/budget', function () {
 
 require __DIR__.'/auth.php';
 
-
 Route::middleware('auth')->group(function(){
     Route::resource('budget',BudgetController::class);
     Route::resource('projet',ProjetController::class);
