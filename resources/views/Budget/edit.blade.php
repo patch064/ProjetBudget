@@ -31,7 +31,7 @@
                 <div class="field">
                     <div class="control">
                         <button class="button is-link">Enregistrer</button>
-                        <a class="button is-info" href="{{ route('budget.index') }}">Retour à la liste</a>
+                        <a class="button is-info" href="{{ route('projet.index') }}">Retour à la liste</a>
                     </div>
                 </div>
             </form>

@@ -53,7 +53,7 @@
     </div>
     <footer class="card-footer">
 
-        <a class="button is-info" href="{{ route('budget.index') }}">Projet</a>
+        <a class="button is-info" href="{{ route('projet.index') }}">Projet</a>
     </footer>
 </div>
 
