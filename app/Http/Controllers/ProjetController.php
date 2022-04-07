@@ -45,8 +45,6 @@ class ProjetController extends Controller
         $projets->libelle=$request->libelle;
         $projets->cout=$request->cout;
         $projets->description=$request->description;
-        $projets->user_id=auth()->user()->id;
-
         $projets->save();
         return redirect()->route('projet.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
     }
@@ -59,7 +57,8 @@ class ProjetController extends Controller
      */
     public function show( $projetsid)
     {
-        $projets=Projet::find($projetsid);
+        $projets=Projet::find($projetsid); //on recupere toutes les lignes de la table
+
         return view('Projet/show', compact('projets'));
     }
 
@@ -71,7 +70,7 @@ class ProjetController extends Controller
      */
     public function edit($projetsid)
     {
-        $projets=Budget::find($projetsid);//on recupere toutes les lignes de la table
+        $projets=Projet::find($projetsid); //on recupere toutes les lignes de la table
 
         return view('Projet/edit', compact('projets'));
     }
