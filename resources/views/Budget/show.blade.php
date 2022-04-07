@@ -13,7 +13,7 @@
                 </div>
             </div>
             <footer class="card-footer is-centered">
-            <a class="button is-info" href="{{ route('budget.index') }}">Retour à la liste</a>
+            <a class="button is-info" href="{{ route('projet.index') }}">Retour à la liste</a>
         </footer>
         </div>
 </x-app-layout>

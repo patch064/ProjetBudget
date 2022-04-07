@@ -28,7 +28,6 @@
 
             <table class="table is-hoverable" >
                 <thead>
-                    <tr>
 
                         <th>Libelle</th>
                         <th>Somme</th>
