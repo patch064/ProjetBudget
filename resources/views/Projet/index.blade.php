@@ -42,6 +42,7 @@
             <table class="table is-hoverable" >
                 <thead>
                     <tr>
+
                         <th>Libelle</th>
                         <th>Cout</th>
                         <th>Description</th>
@@ -50,6 +51,7 @@
 
                     @foreach($projet as $projets)
                     <tr>
+
                         <td><strong>{{ $projets->libelle }}</strong></td>
                         <td><strong>{{ $projets->cout }}</strong></td>
                         <td><strong>{{ $projets->description }}</strong></td>
