@@ -40,7 +40,7 @@ class BudgetController extends Controller
         $budgets->libelle=$request->libelle;
         $budgets->somme=$request->somme;
         $budgets->user_id=auth()->user()->id;
-
+        $budgets->user_id=$request->user_id;
         $budgets->save();
         return redirect()->route('budget.index')->with('info','Le Budget ' . $budgets->libelle . ' a été créée');
     }

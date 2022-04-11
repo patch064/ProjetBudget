@@ -38,8 +38,6 @@
                     <tr>
                         <td><strong>{{$budgets->libelle }}</strong></td>
                         <td><strong>{{$budgets->somme }}</strong></td>
-
-                        <!--<td><a class="button is-primary" href="{{ route('budget.show', $budgets->id) }}">Voir</a></td>-->
                         <td><a class="button is-warning" href="{{ route('budget.edit', $budgets->id) }}">Modifier</a></td>
 
                     </tr>
@@ -50,15 +48,22 @@
 
         </div>
     </div>
+    <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
 
+    <div>
+    <div class="card" style="width:100%">
+        <header class="card-header">
+            @php
+                // $jesuis = \Illuminate\Support\Facades\Auth::user()->id;
+                //
+                /* avant de lancer "php artisan db:seed" , il faut lancer
+                        1- php artisan db:wipe
+                        2- php artisan migrate
+                        3-php artisan db:seed */
+            @endphp
+            <p class="card-header-title">Projet</p>
 
-<br><br><br><br><br><br><br><br><br>
-
-        <div class="card" style="width:100%">
-            <header class="card-header">
-        <p class="card-header-title">Projet</p>
-
-        <a class="button is-info" href="{{ route('projet.create') }}">Créer un projet</a>
+            <a class="button is-info" href="{{ route('projet.create') }}">Créer un projet</a>
         </header>
         <div class="card-content">
 
@@ -69,7 +74,7 @@
 
                     <th>Libelle</th>
                     <th>Cout</th>
-                    <th>Description</th>
+                   <!-- <th>Description</th>-->
                 </thead>
                 <body class="has-background-black">
 
@@ -78,7 +83,7 @@
 
                         <td><strong>{{ $projets->libelle }}</strong></td>
                         <td><strong>{{ $projets->cout }}</strong></td>
-                        <td><strong>{{ $projets->description }}</strong></td>
+                        <!--<td><strong>{{ $projets->description }}</strong></td>-->
 
                         <td><a class="button is-primary" href="{{ route('projet.show', $projets->id) }}">Voir</a></td>
                         <td><a class="button is-warning" href="{{ route('projet.edit', $projets->id) }}">Modifier</a></td>
@@ -96,9 +101,8 @@
             </table>
 
         </div>
-        </div>
-   <!--
-    <div class="card" style="width:100%">
+    </div>
+   <!-- <div class="card" style="width:100%">
         <header class="card-header">
             <p class="card-header-title">Explication</p></header>
         <div class="card-content">
@@ -108,4 +112,4 @@
                 </thead></table></div></div>
 
 -->
-</x-app-layout>
+    </div></x-app-layout>
