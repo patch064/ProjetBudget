@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Projet;
 use App\Http\Requests\ProjetRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProjetController extends Controller
 {
@@ -21,7 +22,7 @@ class ProjetController extends Controller
         //dd($auth_id);
         $projet=Projet::where('user_id',$auth_id)->get();
 
-        $budget=Projet::where('user_id',$auth_id)->get();
+        $budget=Budget::where('user_id',$auth_id)->get();
         return view('Budget/index',compact('budget','projet'));
 
     }
@@ -36,7 +37,14 @@ class ProjetController extends Controller
         $auth_id=auth()->user()->id;
         //dd($auth_id);
         $projet=Projet::where('user_id',$auth_id)->get();
+
+        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
+        select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
+
         return view('Projet/create');
+
+
+        var_dump($BudgetDispo);
     }
 
     /**
@@ -47,13 +55,44 @@ class ProjetController extends Controller
      */
     public function store(ProjetRequest  $request, Projet $projets)
     {
-        $projets->libelle=$request->libelle;
-        $projets->cout=$request->cout;
-        $projets->description=$request->description;
-        $projets->user_id=$request->user_id;
+        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
+            select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
 
-        $projets->save();
-        return redirect()->route('budget.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
+        var_dump($BudgetDispo);
+        if($projets->cout<$BudgetDispo)
+        {
+            $projets->libelle=$request->libelle;
+            $projets->cout=$request->cout;
+            $projets->description=$request->description;
+            $projets->user_id=$request->user_id;
+
+            $projets->save();
+            return redirect()->route('budget.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
+        }        else{
+            return  view('Projet/create')->with('info','Le Projet ' . $projets->libelle . 'ne peut pas etre créée');
+        }
+
+
+    }
+    public function financer(Projet $projet)
+    {
+        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
+        select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
+
+        $depense = $_POST['depense'];
+        $Perdu=$BudgetDispo[0]->somme-$depense;
+
+
+        DB::table('projets')
+            ->where('projets.id',$projet->id)
+            ->update(['cout' => $projet->cout-$depense]);
+
+        DB::table('budgets')
+            ->where('budgets.id',auth()->user()->id)
+            ->update(['somme' => $Perdu]);
+
+
+              return redirect()->route('budget.index')-> with('info',"Vous avez financé pour $depense €");
     }
 
     /**
@@ -64,9 +103,14 @@ class ProjetController extends Controller
      */
     public function show( $projetsid)
     {
+
+        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
+        select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
+
+
         $projets=Projet::find($projetsid); //on recupere toutes les lignes de la table
 
-        return view('Projet/show', compact('projets'));
+        return view('Projet/show', compact('projets','BudgetDispo'));
     }
 
     /**
@@ -81,6 +125,7 @@ class ProjetController extends Controller
 
         return view('Projet/edit', compact('projets'));
     }
+
 
     /**
      * Update the specified resource in storage.

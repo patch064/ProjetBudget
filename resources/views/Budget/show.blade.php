@@ -7,6 +7,7 @@
             <div class="card-content">
                 <div class="content">
                     <hr>
+
                     <p><strong>libelle budget :</strong>{{ $budgets->libelle }}</p>
                     <p><strong>somme :</strong>{{ $budgets->somme }} </p>
 

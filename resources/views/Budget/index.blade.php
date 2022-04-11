@@ -18,13 +18,13 @@
         </div>
     @endif
 
+
     <div class="card" style="width:25%">
         <header class="card-header">
             <p class="card-header-title">Budgets</p>
 
         </header>
         <div class="card-content">
-
 
             <table class="table is-hoverable" >
                 <thead>
@@ -33,6 +33,7 @@
                 <th>Somme</th>
                 </thead>
                 <tbody>
+
 
                 @foreach($budget as $budgets)
                     <tr>
@@ -79,6 +80,7 @@
                 <body class="has-background-black">
 
                 @foreach($projet as $projets)
+
                     <tr>
 
                         <td><strong>{{ $projets->libelle }}</strong></td>
@@ -92,9 +94,10 @@
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button class="button is-danger" type="submit">Supprimer</button>
-                            </form>
+
                         </td>
                     </tr>
+                    </form>
                 @endforeach
 
                 </body>
