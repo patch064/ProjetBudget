@@ -51,8 +51,9 @@ class ProjetController extends Controller
         $projets->libelle=$request->libelle;
         $projets->cout=$request->cout;
         $projets->description=$request->description;
+        $projets->user_id=$request->user_id;
         $projets->save();
-        return redirect()->route('projet.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
+        return redirect()->route('budget.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
     }
 
     /**
@@ -90,7 +91,7 @@ class ProjetController extends Controller
      */
     public function update(ProjetRequest $request, Projet $projet) {
         $projet->update($request->all());
-        return redirect()->route('projet.index')->with('info', 'Le Projet a bien été modifiée');
+        return redirect()->route('budget.index')->with('info', 'Le Projet a bien été modifiée');
     }
 
     /**
@@ -101,6 +102,6 @@ class ProjetController extends Controller
      */
     public function destroy(Projet $projet) {
         $projet->delete();
-        return redirect()->route('projet.index')->with('info', 'Le projet a bien été suprimée');
+        return redirect()->route('budget.index')->with('info', 'Le projet a bien été suprimée');
     }
 }
