@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Budget;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Projet;
@@ -19,7 +20,9 @@ class ProjetController extends Controller
         $auth_id=auth()->user()->id;
         //dd($auth_id);
         $projet=Projet::where('user_id',$auth_id)->get();
-        return view('Projet/index',compact('projet'));
+        $budget=Budget::where('user_id',$auth_id)->get();
+
+        return view('Projet/index',compact('projet','budget'));
     }
     //   $projet=Projet::orderBy('id', 'ASC')->get();
 
@@ -31,6 +34,9 @@ class ProjetController extends Controller
      */
     public function create()
     {
+        $auth_id=auth()->user()->id;
+        //dd($auth_id);
+        $projet=Projet::where('user_id',$auth_id)->get();
         return view('Projet/create');
     }
 

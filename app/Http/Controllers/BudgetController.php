@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Projet;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Budget;
@@ -17,9 +18,13 @@ class BudgetController extends Controller
     public function index()
     {
         $auth_id=auth()->user()->id;
-        //dd($auth_id);
+        //dd($auth_id);l
+
         $budget=Budget::where('user_id',$auth_id)->get();
-        return view('Budget/index',compact('budget'));
+        $projet=Projet::where('user_id',$auth_id)->get();
+
+        return view('Budget/index',compact('budget','projet'));
+
     }
 
 
