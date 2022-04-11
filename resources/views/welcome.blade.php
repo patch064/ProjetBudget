@@ -58,7 +58,6 @@
                     @auth
 
                        <a  href="{{ url('/budget') }}" class="text-sm test  ">Budget</a>
-                        <a href="{{ url('/projet') }}" class="text-sm test ">Projet</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                         <input class="text-sm test " type="submit" value="logout">

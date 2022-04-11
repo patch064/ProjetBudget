@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Budget;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Projet;
@@ -19,11 +20,11 @@ class ProjetController extends Controller
         $auth_id=auth()->user()->id;
         //dd($auth_id);
         $projet=Projet::where('user_id',$auth_id)->get();
+
         $budget=Projet::where('user_id',$auth_id)->get();
         return view('Budget/index',compact('budget','projet'));
-    }
-    //   $projet=Projet::orderBy('id', 'ASC')->get();
 
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -32,6 +33,9 @@ class ProjetController extends Controller
      */
     public function create()
     {
+        $auth_id=auth()->user()->id;
+        //dd($auth_id);
+        $projet=Projet::where('user_id',$auth_id)->get();
         return view('Projet/create');
     }
 
@@ -87,7 +91,9 @@ class ProjetController extends Controller
      */
     public function update(ProjetRequest $request, Projet $projet) {
         $projet->update($request->all());
-        return redirect()->route('Budget.index')->with('info', 'Le Projet a bien été modifiée');
+
+        return redirect()->route('budget.index')->with('info', 'Le Projet a bien été modifiée');
+
     }
 
     /**
