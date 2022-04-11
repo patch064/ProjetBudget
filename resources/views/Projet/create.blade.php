@@ -35,6 +35,9 @@
                     <p class="help is-danger">Le nom du projets est incorrect</p>
                     @enderror
                 </div>
+                <div>
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
+            </div>
                 <div class="field">
                     <div class="control">
                         <button class="button is-link">Envoyer</button>
