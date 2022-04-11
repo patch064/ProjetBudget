@@ -29,11 +29,6 @@
                 </div>
                 <div class="field">
                     <label for="description" class="label">Description</label>
-                    <div class="control">
-                        <input type="text"   name="description" value="{{ old('description',$projets->description) }}" required>
-                    </div>
-                    <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
-
                     @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -74,7 +74,7 @@ class ProjetController extends Controller
 
 
     }
-    public function financer(Projet $projet)
+    public function finance(Projet $projet)
     {
         $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
         select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();

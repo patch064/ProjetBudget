@@ -89,6 +89,8 @@
 
                         <td><a class="button is-primary" href="{{ route('projet.show', $projets->id) }}">Voir</a></td>
                         <td><a class="button is-warning" href="{{ route('projet.edit', $projets->id) }}">Modifier</a></td>
+                        <td><a class="button is-family-secondary" href="{{ route('projet.finance', $projets->id) }}">+/-</a></td>
+
                         <td>
                             <form action="{{ route('projet.destroy', $projets->id) }}" method="post">
                                 {{ csrf_field() }}
