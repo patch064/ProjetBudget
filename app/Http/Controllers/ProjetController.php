@@ -20,12 +20,11 @@ class ProjetController extends Controller
         $auth_id=auth()->user()->id;
         //dd($auth_id);
         $projet=Projet::where('user_id',$auth_id)->get();
-        $budget=Budget::where('user_id',$auth_id)->get();
 
-        return view('Projet/index',compact('projet','budget'));
+        $budget=Projet::where('user_id',$auth_id)->get();
+        return view('Budget/index',compact('budget','projet'));
+
     }
-    //   $projet=Projet::orderBy('id', 'ASC')->get();
-
 
     /**
      * Show the form for creating a new resource.
@@ -52,6 +51,7 @@ class ProjetController extends Controller
         $projets->cout=$request->cout;
         $projets->description=$request->description;
         $projets->user_id=$request->user_id;
+
         $projets->save();
         return redirect()->route('budget.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
     }
@@ -91,7 +91,9 @@ class ProjetController extends Controller
      */
     public function update(ProjetRequest $request, Projet $projet) {
         $projet->update($request->all());
+
         return redirect()->route('budget.index')->with('info', 'Le Projet a bien été modifiée');
+
     }
 
     /**

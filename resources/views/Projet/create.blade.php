@@ -35,6 +35,8 @@
                     <p class="help is-danger">Le nom du projets est incorrect</p>
                     @enderror
                 </div>
+
+
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
 
                 <div class="field">
