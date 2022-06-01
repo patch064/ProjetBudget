@@ -2,12 +2,12 @@
 
 <div class="card">
             <header class="card-header">
-                <p class="title"><strong>Opération :</strong></p>
+                <p class="title"><strong>Opération:</strong></p>
             </header>
             <div class="card-content">
                 <div class="content">
                     <hr>
-                    <form action="{{ route('projet.financer', $projets->id) }}" method="post">
+                    <form action="{{ route('projet.finance', $projets->id) }}" method="post">
                         @method('PUT')
                         @csrf
                     <p><strong>Coût :</strong>{{ $projets->cout }} </p>

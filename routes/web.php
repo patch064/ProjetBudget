@@ -22,7 +22,8 @@ Route::get('/', function () {
 
 })->name ('menu');
 
-Route::get('/projet/{projet}/finance', [ProjetController::class, 'finance'])->name('projet.finance');
+Route::put('/projet/{projet}/financer', [ProjetController::class, 'financer'])->name('projet.financer');
+Route::put('/projet/{projet}/finance', [ProjetController::class, 'finance'])->name('projet.finance');
 
 Route::get('/budget', function () {
     return view('budget');
