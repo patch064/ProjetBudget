@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'bts.slam.tu.tes.perdu@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('1234567890'),
-            //'remember_token' => 'ugUlI0znbQJcl1amGfcVofsBYCl4wkZSPp8njxk57f427jr7dYDoASlW4tCe',
+            'remember_token' => 'ugUlI0znbQJcl1amGfcVofsBYCl4wkZSPp8njxk57f427jr7dYDoASlW4tCe',
         ]);
 
         DB::table('budgets')->insert([
