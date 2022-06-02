@@ -18,7 +18,7 @@ class BudgetController extends Controller
     public function index()
     {
         $auth_id=auth()->user()->id;
-        //dd($auth_id);l
+
 
         $budget=Budget::where('user_id',$auth_id)->get();
         $projet=Projet::where('user_id',$auth_id)->get();
@@ -78,6 +78,7 @@ class BudgetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(BudgetRequest $request, Budget $budget) {
+
         $budget->update($request->all());
         return redirect()->route('budget.index')->with('info', 'Le Budget a bien été modifiée');
     }

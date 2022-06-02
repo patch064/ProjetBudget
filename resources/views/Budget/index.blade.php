@@ -25,34 +25,34 @@
 
         </header>
         <div class="card-content">
+            <div class="table-responsive" >
+                <table class="table" >
+                    <thead>
 
-            <table class="table is-hoverable" >
-                <thead>
-
-                <th>Libelle</th>
-                <th>Somme</th>
-                </thead>
-                <tbody>
+                    <th>Libelle</th>
+                    <th>Somme</th>
+                    </thead>
+                    <tbody>
 
 
-                @foreach($budget as $budgets)
-                    <tr>
-                        <td><strong>{{$budgets->libelle }}</strong></td>
-                        <td><strong>{{$budgets->somme }}</strong></td>
-                        <td><a class="btn btn-warning" href="{{ route('budget.edit', $budgets->id) }}">Modifier</a></td>
+                    @foreach($budget as $budgets)
+                        <tr>
+                            <td><strong>{{$budgets->libelle }}</strong></td>
+                            <td><strong>{{$budgets->somme }}</strong></td>
+                            <td><a class="btn btn-warning" href="{{ route('budget.edit', $budgets->id) }}">Modifier</a></td>
 
-                    </tr>
-                @endforeach
+                        </tr>
+                    @endforeach
 
-                </tbody>
-            </table>
-
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
 
     <div>
-    <div class="card" style="width:100%">
+        <div class="card" style="width:100%">
 
             @php
                 // $jesuis = \Illuminate\Support\Facades\Auth::user()->id;
@@ -65,53 +65,81 @@
             <div class="row">
                 <div class="col-md-auto">
 
-                <p class="card-header-title">Projet </p>
+                    <p class="card-header-title">Projet </p>
                 </div>
                 <div class="col-2 justify-content-md-end">
-                <a class="btn btn-primary" href="{{ route('projet.create') }}">Créer un projet</a>
+                    <a class="btn btn-primary" href="{{ route('projet.create') }}">Créer un projet</a>
                 </div>
 
             </div>
 
-        <div class="card-content">
+            <div class="card-content">
+
+                <div class="table-responsive" >
+                    <table class="table is-hoverable" >
+                        <thead>
+                        <tr>
+
+                            <th>Libelle</th>
+                            <th>Cout</th>
+                            <!-- <th>Description</th>-->
+                        </thead>
+                        <body class="has-background-black">
+
+                        @foreach($projet as $projets)
+
+                            <tr>
+
+                                <td><strong>{{ $projets->libelle }}</strong></td>
+                                <td><strong>{{ $projets->cout }}</strong></td>
 
 
-            <table class="table is-hoverable" >
-                <thead>
-                <tr>
+                                <td><a class="btn btn-primary" href="{{ route('projet.show', $projets->id) }}">Voir</a></td>
+                                <td><a class="btn btn-warning" href="{{ route('projet.edit', $projets->id) }}">Modifier</a></td>
+                                <td>
+                                    <form action="{{ route('projet.finance', $projets->id) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
 
-                    <th>Libelle</th>
-                    <th>Cout</th>
-                   <!-- <th>Description</th>-->
-                </thead>
-                <body class="has-background-black">
+                                        <a class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal" >+/-</a>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Opération</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="operation" class="col-form-label"></label>
+                                                            <input class="input" id="operation" type="number" name="depense"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                        <button type="submit" class="btn btn-primary">Valider</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td><form action="{{ route('projet.destroy', $projets->id) }}" method="post">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <button class="button is-danger" type="submit">Supprimer</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
 
-                @foreach($projet as $projets)
-
-                    <tr>
-
-                        <td><strong>{{ $projets->libelle }}</strong></td>
-                        <td><strong>{{ $projets->cout }}</strong></td>
-                        <!--<td><strong>{{ $projets->description }}</strong></td>-->
-
-                        <td><a class="btn btn-primary" href="{{ route('projet.show', $projets->id) }}">Voir</a></td>
-                        <td><a class="btn btn-warning" href="{{ route('projet.edit', $projets->id) }}">Modifier</a></td>
-                        <td><a class="btn btn-success" href="{{ route('projet.finance', $projets->id) }}">+/-</a></td>
-                        <td><form action="{{ route('projet.destroy', $projets->id) }}" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button class="button is-danger" type="submit">Supprimer</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-
-                </body>
-            </table>
-
+                        </body>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-   <!-- <div class="card" style="width:100%">
+        <!-- <div class="card" style="width:100%">
         <header class="card-header">
             <p class="card-header-title">Explication</p></header>
         <div class="card-content">
@@ -125,27 +153,10 @@
 
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-    </button>
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+         Launch demo modal
+     </button>-->
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 </x-app-layout>

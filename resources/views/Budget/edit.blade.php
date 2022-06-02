@@ -11,13 +11,13 @@
 
                 {{ method_field('PUT') }}
 
-              <!--  <div class="field"> -->
+               <div class="field">
                     <label for="nombudget" class="label">libelle</label>
                     <input type="text" name="libelle" value="{{ old('libelle',$budgets->libelle) }}" >
                     @error('libelle')
                     <div class="invalid-feedback">Une reponse est attendu</div>
                     @enderror
-                <!-- </div> -->
+                 </div>
                 <div class="field">
                     <label for="somme" class="label">somme</label>
                     <div class="control">

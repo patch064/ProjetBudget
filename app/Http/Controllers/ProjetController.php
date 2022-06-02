@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Facade\FlareClient\Context\RequestContext;
 use Illuminate\Http\Request;
 use App\Models\Projet;
 use App\Http\Requests\ProjetRequest;
@@ -18,6 +20,7 @@ class ProjetController extends Controller
      */
     public function index()
     {
+
         $auth_id=auth()->user()->id;
         //dd($auth_id);
         $projet=Projet::where('user_id',$auth_id)->get();
@@ -55,6 +58,7 @@ class ProjetController extends Controller
      */
     public function store(ProjetRequest  $request, Projet $projets)
     {
+
         $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
             select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
 
@@ -74,25 +78,29 @@ class ProjetController extends Controller
 
 
     }
-    public function financer(Projet $projet)
+    public function finance(Request $request, $projet)
     {
+
         $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
         select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
 
-        $depense = $_POST['depense'];
-        $Perdu=$BudgetDispo[0]->somme-$depense;
+        /*$depense = $_POST['depense'];
+        $Perdu=$BudgetDispo[0]->somme-$depense;*/
+        $monProjet = Projet::find($projet);
+        $monBudget = Budget::where('user_id',auth()->user()->id)->first();
 
-
-        DB::table('projets')
+        $monProjet->update(['cout'=>$monProjet->cout-$request['depense']]);
+        $monBudget->update(['somme'=>$monBudget->somme-$request['depense']]);
+        /*DB::table('projets')
             ->where('projets.id',$projet->id)
             ->update(['cout' => $projet->cout-$depense]);
-
-        DB::table('budgets')
+*/
+       /* DB::table('budgets')
             ->where('budgets.id',auth()->user()->id)
-            ->update(['somme' => $Perdu]);
+            ->update(['somme' => $Perdu]);*/
 
 
-              return redirect()->route('budget.index')-> with('info',"Vous avez financé pour $depense €");
+              return redirect()->route('budget.index')-> with('info',"Vous avez financé pour ". $request['depense'] ." €");
     }
 
     /**
@@ -135,9 +143,10 @@ class ProjetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ProjetRequest $request, Projet $projet) {
+
         $projet->update($request->all());
 
-        return redirect()->route('budget.index')->with('info', 'Le Projet a bien été modifiée');
+      return redirect()->route('budget.index')->with('info', 'Le Projet a bien été modifiée');
 
     }
 
