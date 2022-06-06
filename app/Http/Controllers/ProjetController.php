@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OperationDRequest;
 use App\Models\Budget;
+use App\Models\OperationsBudgets;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Facade\FlareClient\Context\RequestContext;
@@ -22,11 +24,19 @@ class ProjetController extends Controller
     {
 
         $auth_id=auth()->user()->id;
-        //dd($auth_id);
+
         $projet=Projet::where('user_id',$auth_id)->get();
 
-        $budget=Budget::where('user_id',$auth_id)->get();
-        return view('Budget/index',compact('budget','projet'));
+        $budget=Budget::where('user_id',$auth_id)->first();
+        //dd($budget);
+        $operationBudgets=OperationsBudgets::where('budget_id',$budget->id)->orderBy('id','desc')->limit(12)->get();
+        //dd($operationBudgets[1]);
+        return view('Budget/index',[
+            'budget'=>$budget,
+            'projet'=>$projet,
+            'operationBudgets'=>$operationBudgets
+        ]
+        );
 
     }
 
@@ -37,17 +47,8 @@ class ProjetController extends Controller
      */
     public function create()
     {
-        $auth_id=auth()->user()->id;
-        //dd($auth_id);
-        $projet=Projet::where('user_id',$auth_id)->get();
-
-        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
-        select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
-
         return view('Projet/create');
-
-
-        var_dump($BudgetDispo);
+      //var_dump($BudgetDispo);
     }
 
     /**
@@ -56,53 +57,42 @@ class ProjetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjetRequest  $request, Projet $projets)
+    public function store(ProjetRequest  $request)
     {
+        $userid=auth()->user()->id;
+        //$monBudget = Budget::where('user_id',$userid)->first();
+       //dd($request);
 
-        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
-            select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
-
-        var_dump($BudgetDispo);
-        if($projets->cout<$BudgetDispo)
-        {
-            $projets->libelle=$request->libelle;
-            $projets->cout=$request->cout;
-            $projets->description=$request->description;
-            $projets->user_id=$request->user_id;
-
-            $projets->save();
-            return redirect()->route('budget.index')->with('info','Le Projet ' . $projets->libelle . ' a été créée');
-        }        else{
-            return  view('Projet/create')->with('info','Le Projet ' . $projets->libelle . 'ne peut pas etre créée');
-        }
-
-
+            $validated=$request->validated();
+            $result=array_merge($validated,['user_id'=>$userid]);
+            Projet::create($result);
+            return redirect()->route('projet.index')->with('info','Le Projet ' . $request->libelle . ' a été créée');
     }
-    public function finance(Request $request, $projet)
+
+    public function finance(OperationDRequest $request, $projet)
     {
 
-        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
-        select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
-
-        /*$depense = $_POST['depense'];
-        $Perdu=$BudgetDispo[0]->somme-$depense;*/
+        $userid = auth()->user()->id;
         $monProjet = Projet::find($projet);
-        $monBudget = Budget::where('user_id',auth()->user()->id)->first();
+        $monBudget = Budget::where('user_id', $userid)->first();
 
-        $monProjet->update(['cout'=>$monProjet->cout-$request['depense']]);
-        $monBudget->update(['somme'=>$monBudget->somme-$request['depense']]);
-        /*DB::table('projets')
-            ->where('projets.id',$projet->id)
-            ->update(['cout' => $projet->cout-$depense]);
-*/
-       /* DB::table('budgets')
-            ->where('budgets.id',auth()->user()->id)
-            ->update(['somme' => $Perdu]);*/
+        $monProjet->update(['cout' => $monProjet->cout - $request['depense']]);
+        $monBudget->update(['somme' => $monBudget->somme - $request['depense']]);
+        $paramOpe = [
+            'budget_id' => $monBudget->id,
+            'operations' => $request['depense'],
+            'type_operation' => 0
+        ];
 
+        if ($request['depense'] < $monProjet->cout) {
 
-              return redirect()->route('budget.index')-> with('info',"Vous avez financé pour ". $request['depense'] ." €");
+            OperationsBudgets::create($paramOpe);
+
+            //dd($monProjet);
+        }
+            return redirect()->route('projet.index')->with('info', "Vous avez financé pour " . $request['depense'] . " €");
+
     }
-
     /**
      * Display the specified resource.
      *
@@ -111,14 +101,8 @@ class ProjetController extends Controller
      */
     public function show( $projetsid)
     {
-
-        $BudgetDispo=DB::table('budgets')->join('users', 'budgets.user_id','=','users.id')->
-        select('budgets.somme')->where('users.id','=',auth()->user()->id)->get();
-
-
         $projets=Projet::find($projetsid); //on recupere toutes les lignes de la table
-
-        return view('Projet/show', compact('projets','BudgetDispo'));
+        return view('Projet/show', compact('projets'));
     }
 
     /**
@@ -146,7 +130,7 @@ class ProjetController extends Controller
 
         $projet->update($request->all());
 
-      return redirect()->route('budget.index')->with('info', 'Le Projet a bien été modifiée');
+      return redirect()->route('projet.index')->with('info', 'Le Projet a bien été modifiée');
 
     }
 
@@ -158,6 +142,6 @@ class ProjetController extends Controller
      */
     public function destroy(Projet $projet) {
         $projet->delete();
-        return redirect()->route('budget.index')->with('info', 'Le projet a bien été suprimée');
+        return redirect()->route('projet.index')->with('info', 'Le projet a bien été suprimée');
     }
 }

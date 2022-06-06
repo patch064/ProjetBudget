@@ -57,7 +57,7 @@
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
 
-                       <a  href="{{ url('/budget') }}" class="text-sm test  ">Budget</a>
+                       <a  href="{{ url('/projet') }}" class="text-sm test  ">Retour</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                         <input class="text-sm test " type="submit" value="logout">

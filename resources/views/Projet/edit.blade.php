@@ -21,7 +21,7 @@
                 <div class="field">
                     <label for="somme" class="label">cout</label>
                     <div class="control">
-                        <input type="numeric"   name="cout" value="{{ old('cout',$projets->cout) }}" required>
+                        <input type="number"   name="cout" value="{{ old('cout',$projets->cout) }}" required>
                     </div>
                     @error('cout')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -29,6 +29,9 @@
                 </div>
                 <div class="field">
                     <label for="description" class="label">Description</label>
+                    <div class="control">
+                        <input type="text" name="description" value="{{ old('description',$projets->description) }}" required>
+                    </div>
                     @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

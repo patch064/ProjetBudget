@@ -19,16 +19,6 @@
                     @enderror
                  </div>
                 <div class="field">
-                    <label for="somme" class="label">somme</label>
-                    <div class="control">
-                        <input type="numeric"   name="somme" value="{{ old('somme',$budgets->somme) }}" required>
-                    </div>
-                    @error('somme')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-
-                </div>
-                <div class="field">
                     <div class="control">
                         <button class="button is-link">Enregistrer</button>
                         <a class="button is-info" href="{{ route('projet.index') }}">Retour à la liste</a>

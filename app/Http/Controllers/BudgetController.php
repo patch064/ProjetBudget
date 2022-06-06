@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OperationGRequest;
 use App\Models\Projet;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Budget;
 use App\Http\Requests\BudgetRequest;
+use App\Models\OperationsBudgets;
+
 
 class BudgetController extends Controller
 {
@@ -42,7 +45,7 @@ class BudgetController extends Controller
         $budgets->user_id=auth()->user()->id;
         $budgets->user_id=$request->user_id;
         $budgets->save();
-        return redirect()->route('budget.index')->with('info','Le Budget ' . $budgets->libelle . ' a été créée');
+        return redirect()->route('projet.index')->with('info','Le Budget ' . $budgets->libelle . ' a été créée');
     }
 
     /**
@@ -80,9 +83,29 @@ class BudgetController extends Controller
     public function update(BudgetRequest $request, Budget $budget) {
 
         $budget->update($request->all());
-        return redirect()->route('budget.index')->with('info', 'Le Budget a bien été modifiée');
+        return redirect()->route('projet.index')->with('info', 'Le Budget a bien été modifiée');
     }
 
+    public function Gain(OperationGRequest $request)
+    {
+
+        $userid = auth()->user()->id;
+        $monBudget = Budget::where('user_id', $userid)->first();
+        $monBudget->update(['somme' => $monBudget->somme + $request['gain']]);
+        $paramOpe = [
+            'budget_id' => $monBudget->id,
+            'operations' => $request['gain'],
+            'type_operation' => 1
+        ];
+
+
+            OperationsBudgets::create($paramOpe);
+
+            //dd($monProjet);
+
+        return redirect()->route('projet.index')->with('info', "Vous avez ajouté " . $request['gain'] . " €");
+
+    }
     /**
      * Remove the specified resource from storage.
      *

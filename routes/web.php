@@ -22,7 +22,6 @@ Route::get('/', function () {
 
 })->name ('menu');
 
-Route::put('/projet/finance/{projet}', [ProjetController::class, 'finance'])->name('projet.finance');
 
 Route::get('/budget', function () {
     return view('budget');
@@ -33,6 +32,9 @@ require __DIR__.'/auth.php';
 Route::middleware('auth')->group(function(){
     Route::resource('budget',BudgetController::class);
     Route::resource('projet',ProjetController::class);
+    Route::put('/projet/finance/{projet}', [ProjetController::class, 'finance'])->name('projet.finance');
+    Route::put('/budget/gain/{budget}', [BudgetController::class, 'gain'])->name('budget.gain');
+
 });
 
 

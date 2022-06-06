@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Budget extends Model
+class OperationsBudgets extends Model
 {
-    protected $table = 'budgets';
+    protected $table = 'operations_budgets';
     protected $primaryKey = 'id';
-    protected $fillable = ['libelle', 'somme', 'user_id'];
+    protected $fillable = ['budget_id','operations','type_operation'];
 
     use HasFactory;
     public $timestamps = false;
@@ -18,5 +18,8 @@ class Budget extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
+    public function Budget()
+    {
+        return $this->belongsTo(Budget::class, 'budget_id');
+    }
 }

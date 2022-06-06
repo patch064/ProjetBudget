@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Budgets extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -21,7 +21,7 @@ class Budgets extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('User')
+                ->on('users')
                 ->onDelete('cascade');
         });
     }
@@ -33,7 +33,7 @@ class Budgets extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Budget');
+        Schema::dropIfExists('Budgets');
 
     }
-}
+};
